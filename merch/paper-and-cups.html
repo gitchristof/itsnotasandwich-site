@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>Paper and cups</title>
+<style>
+  @font-face { font-family: "Gelasio"; font-style: normal; font-weight: 400 700; src: url(../fonts/gelasio-roman.woff2) format("woff2"); }
+  @font-face { font-family: "Gelasio"; font-style: italic; font-weight: 400 700; src: url(../fonts/gelasio-italic.woff2) format("woff2"); }
+  @font-face { font-family: "JetBrains Mono"; font-weight: 400 500; src: url(../fonts/jetbrains-mono.woff2) format("woff2"); }
+  :root { --cream:#f1e9d6; --ink:#1a1714; --mustard:#dba623; --muted:#6e675c; --paper:#f7f2e6; }
+  body { margin:0; background:#e4dcc8; font-family:"Gelasio",Georgia,serif; color:var(--ink); }
+  .stage { display:flex; gap:56px; align-items:flex-end; padding:56px; }
+
+  /* Deli paper sheet */
+  .paper {
+    width:520px; height:520px; flex:none; position:relative; overflow:hidden;
+    background:var(--paper);
+    transform:rotate(-4deg);
+    box-shadow:0 18px 40px rgba(26,23,20,.18), 0 2px 4px rgba(26,23,20,.12);
+  }
+  .paper::after { /* subtle crinkle/grain */
+    content:""; position:absolute; inset:0; pointer-events:none;
+    background:
+      linear-gradient(115deg, transparent 40%, rgba(26,23,20,.05) 41%, transparent 43%),
+      linear-gradient(28deg, transparent 62%, rgba(255,255,255,.5) 63%, transparent 65%),
+      linear-gradient(160deg, transparent 20%, rgba(26,23,20,.04) 21%, transparent 23%);
+  }
+  .tile { position:absolute; inset:-120px; display:flex; flex-direction:column; gap:30px; transform:rotate(-12deg); }
+  .row { display:flex; gap:34px; align-items:center; white-space:nowrap; }
+  .row:nth-child(odd) { margin-left:-150px; }
+  .t { font-weight:700; font-size:30px; line-height:1; white-space:nowrap; }
+  .t i { font-size:.6em; }
+  .t .b { background:var(--ink); color:var(--paper); padding:0 .08em; }
+  .t .m { background:var(--mustard); padding:0 .08em; }
+  .t .mk { font-family:"JetBrains Mono",monospace; color:var(--mustard); font-weight:500; font-size:22px; }
+  .t .cap { font-family:"JetBrains Mono",monospace; font-weight:400; font-size:10px; letter-spacing:.28em; color:var(--muted); }
+
+  /* Cups */
+  .cup { position:relative; flex:none; }
+  .cup svg { display:block; }
+  .label { font-family:"JetBrains Mono",monospace; font-size:12px; letter-spacing:.28em; text-transform:uppercase; color:var(--muted); text-align:center; margin-top:14px; }
+</style>
+</head>
+<body>
+<div class="stage">
+
+  <div>
+    <div class="paper" aria-label="Deli paper print">
+      <div class="tile" id="tile"></div>
+    </div>
+    <div class="label" style="margin-top:34px">Deli paper</div>
+  </div>
+
+  <!-- Cup 1: cream cup, ink band with the stacked logo -->
+  <div class="cup">
+    <svg width="230" height="330" viewBox="0 0 230 330">
+      <defs>
+        <clipPath id="c1"><path d="M20 30 L210 30 L186 318 Q115 326 44 318 Z"/></clipPath>
+        <linearGradient id="shade" x1="0" x2="1">
+          <stop offset="0" stop-color="#000" stop-opacity=".16"/><stop offset=".3" stop-color="#fff" stop-opacity=".18"/>
+          <stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".22"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="115" cy="322" rx="84" ry="7" fill="#000" opacity=".12"/>
+      <g clip-path="url(#c1)">
+        <rect width="230" height="330" fill="#f1e9d6"/>
+        <rect y="112" width="230" height="130" fill="#1a1714"/>
+        <text x="115" y="148" text-anchor="middle" font-family="Gelasio" font-style="italic" font-weight="700" font-size="22" fill="#f1e9d6">it’s not a</text>
+        <rect x="55" y="162" width="120" height="34" fill="#dba623"/>
+        <text x="115" y="187" text-anchor="middle" font-family="Gelasio" font-weight="700" font-size="23" fill="#1a1714">sandwich.</text>
+        <text x="115" y="228" text-anchor="middle" font-family="JetBrains Mono" font-size="9" letter-spacing="2.6" fill="#f1e9d6" opacity=".75">MÜNCHEN · SANDO</text>
+        <g stroke="#dba623" stroke-width="5" fill="none"><line x1="92" y1="72" x2="104" y2="72"/><line x1="126" y1="72" x2="138" y2="72"/><line x1="122" y1="56" x2="108" y2="90"/></g>
+        <rect width="230" height="330" fill="url(#shade)"/>
+      </g>
+      <rect x="12" y="18" width="206" height="16" rx="4" fill="#1a1714"/>
+      <rect x="12" y="18" width="206" height="5" rx="2" fill="#fff" opacity=".12"/>
+    </svg>
+    <div class="label">Cup · cream</div>
+  </div>
+
+  <!-- Cup 2: mustard cup, big "a sandwich." wordmark -->
+  <div class="cup">
+    <svg width="200" height="270" viewBox="0 0 200 270">
+      <defs>
+        <clipPath id="c2"><path d="M18 26 L182 26 L162 260 Q100 267 38 260 Z"/></clipPath>
+        <linearGradient id="shade2" x1="0" x2="1">
+          <stop offset="0" stop-color="#000" stop-opacity=".18"/><stop offset=".3" stop-color="#fff" stop-opacity=".16"/>
+          <stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".24"/>
+        </linearGradient>
+      </defs>
+      <ellipse cx="100" cy="264" rx="72" ry="6" fill="#000" opacity=".12"/>
+      <g clip-path="url(#c2)">
+        <rect width="200" height="270" fill="#dba623"/>
+        <text x="34" y="104" font-family="Gelasio" font-style="italic" font-weight="700" font-size="20" fill="#1a1714">it</text>
+        <rect x="34" y="112" width="82" height="32" fill="#1a1714"/>
+        <text x="39" y="138" font-family="Gelasio" font-weight="700" font-size="26" fill="#dba623">’s not</text>
+        <text x="34" y="180" font-family="Gelasio" font-weight="700" font-size="21" fill="#1a1714"><tspan font-style="italic">a</tspan> sandwich.</text>
+        <text x="100" y="212" text-anchor="middle" font-family="JetBrains Mono" font-size="7" letter-spacing="1.6" fill="#1a1714" opacity=".7">THE LOGO IS THE ANSWER</text>
+        <rect width="200" height="270" fill="url(#shade2)"/>
+      </g>
+      <rect x="10" y="14" width="180" height="15" rx="4" fill="#f1e9d6"/>
+      <rect x="10" y="25" width="180" height="4" rx="2" fill="#000" opacity=".1"/>
+    </svg>
+    <div class="label">Cup · mustard</div>
+  </div>
+
+</div>
+<script>
+  const t = document.getElementById('tile');
+  const unit = '<span class="t"><i>it</i><span class="b">’s not</span></span>'
+    + '<span class="t"><i>a</i> <span class="m">sandwich</span>.</span>'
+    + '<span class="t"><span class="mk">-/-</span></span>';
+  const cap = '<span class="t"><span class="cap">THE LOGO IS THE ANSWER</span></span><span class="t"><span class="mk">-/-</span></span>';
+  let h = '';
+  for (let r = 0; r < 12; r++) h += '<div class="row">' + (r % 3 === 2 ? cap.repeat(5) : unit.repeat(3)) + '</div>';
+  t.innerHTML = h;
+</script>
+</body>
+</html>
